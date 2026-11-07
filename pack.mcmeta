@@ -1,25 +1,13 @@
 {
-  "pack": {
-	"min_format": [97,1],
-	"max_format": [97,1],
-    "description": "XSSheep\u0027s and Nova Wostra\u0027s Pixel Perfection."
-  },
-    "overlays": {
-        "entries": [
-            {
-                "directory": "1.20",
-                "formats": {
-                    "min_inclusive": 15,
-                    "max_inclusive": 18
-                }
-            },
-            {
-                "directory": "1.21",
-                "formats": {
-                    "min_inclusive": 19,
-                    "max_inclusive": 36
-                }
-            }
-        ]
-    }
+	"pack": {
+		"min_format": [
+			97,
+			1
+		],
+		"max_format": [
+			97,
+			1
+		],
+		"description": "PP Modernised: XSSheep's Pixel Perfection for 26.3"
+	}
 }
