@@ -77,7 +77,7 @@ def main():
 
 	block_map = json.load(open(tex_map)).get("block", {})
 	java_for = {}
-	for jname in os.listdir(os.path.join(jtex, "block")):
+	for jname in sorted(os.listdir(os.path.join(jtex, "block"))):
 		if not jname.endswith(".png") or re.search(r"_(n|s|e|e_s)\.png$", jname):
 			continue
 		j = jname[:-4]
@@ -86,7 +86,10 @@ def main():
 			b = b[0]
 		if isinstance(b, dict):
 			b = next(iter(b.values()))
-		java_for.setdefault(b, j)
+		# Legacy Java names (portal, reeds, trip_wire) collide with the current name that Thunder maps to the
+		# same Bedrock texture. The current name is the one the game loads, so an explicit mapping wins.
+		if b not in java_for or (j in block_map and java_for[b] not in block_map):
+			java_for[b] = j
 
 	# 2. Animated strips.
 	terrain = load_bedrock_json(os.path.join(ref, "terrain_texture.json"))["texture_data"]
