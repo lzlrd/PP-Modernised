@@ -76,7 +76,7 @@ def main():
 	report.append("removed %d Java-only texture files and Thunder's unused converted block geometry" % removed)
 
 	block_map = json.load(open(tex_map)).get("block", {})
-	java_for = {}
+	candidates = {}
 	for jname in sorted(os.listdir(os.path.join(jtex, "block"))):
 		if not jname.endswith(".png") or re.search(r"_(n|s|e|e_s)\.png$", jname):
 			continue
@@ -86,10 +86,24 @@ def main():
 			b = b[0]
 		if isinstance(b, dict):
 			b = next(iter(b.values()))
-		# Legacy Java names (portal, reeds, trip_wire) collide with the current name that Thunder maps to the
-		# same Bedrock texture. The current name is the one the game loads, so an explicit mapping wins.
-		if b not in java_for or (j in block_map and java_for[b] not in block_map):
-			java_for[b] = j
+		candidates.setdefault(b, []).append(j)
+
+	def same_pixels(a, b):
+		if not (a and b):
+			return False
+		ia, ib = Image.open(a).convert("RGBA"), Image.open(b).convert("RGBA")
+		return ia.size == ib.size and ia.tobytes() == ib.tobytes()
+
+	# A legacy Java name (grass_path_side) and its current one (dirt_path_side) can both map to one Bedrock
+	# texture. The PBR maps must come from the Java texture whose art Thunder converted, so pixels decide;
+	# failing that, an explicit Thunder mapping wins over a name that only matches by identity.
+	java_for = {}
+	for b, js in candidates.items():
+		if len(js) > 1:
+			color = image_path(os.path.join(tdir, "blocks", b))
+			match = [j for j in js if same_pixels(color, os.path.join(jtex, "block", j + ".png"))]
+			js = match or sorted(js, key=lambda j: j not in block_map)
+		java_for[b] = js[0]
 
 	# 2. Animated strips.
 	terrain = load_bedrock_json(os.path.join(ref, "terrain_texture.json"))["texture_data"]
