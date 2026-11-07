@@ -110,18 +110,21 @@ def main():
 		g.append("setblock %d %d %d %s" % (60 + (i % cols) * 2, Y, (i // cols) * 2, n))
 	with open(os.path.join(fdir, "grid.mcfunction"), "w") as f:
 		f.write("\n".join(g) + "\n")
+	# Dungeons and Taverns keys on item displays, by custom_model_data.
+	inc = [("trial_key", 724), ("trial_key", 720), ("trial_key", 726), ("ominous_trial_key", 711), ("ominous_trial_key", 712)]
+	it = ["kill @e[type=item_display]", "fill 24 %d 27 44 %d 29 air" % (Y, Y + 4)]
+	for i, (item, cmd) in enumerate(inc):
+		it.append('summon item_display %.1f %.1f 28.5 {item:{id:"minecraft:%s",count:1,components:{"minecraft:custom_model_data":{floats:[%d.0f]}}},item_display:"gui"}' % (25.5 + i * 1.5, Y + 1.5, item, cmd))
+	with open(os.path.join(fdir, "items.mcfunction"), "w") as f:
+		f.write("\n".join(it) + "\n")
 	views = {
-		"wall": (10, Y + 2, 9, 180, 15),
-		"specials": (20, Y + 3, 3, 0, 40),
-		"shulkers": (17, Y + 4, 6, 0, 50),
-		"flowers": (12, Y + 2, 10, 0, 25),
-		"flowers_close": (6, Y + 1, 11.5, 0, 25),
-		"rails": (6, Y + 3, 27, 160, 35),
-		"pond": (16, Y + 4, 27, 180, 50),
-		"logs": (12, Y + 2, 7.5, 180, 20),
-		"pbr_left": (5, Y + 2, 37, 160, 12),
-		"pbr_mid": (19, Y + 2, 37, 180, 12),
-		"pbr_right": (35, Y + 2, 37, 200, 12),
+		"overview": (13, Y + 9, 29, 160, 38),
+		"wall_close": (6, Y + 1.6, 7.2, 180, 8),
+		"specials_close": (12, Y + 2.2, 11, 180, 25),
+		"flowers_close": (8, Y + 1.2, 18, 180, 18),
+		"rails_close": (4, Y + 2, 27.5, 170, 30),
+		"pbr_wall": (12, Y + 1.6, 38, 180, 4),
+		"items": (34, Y + 1.5, 31.2, 180, 0),
 	}
 	rows = 2 * ((len(names) + cols - 1) // cols)
 	for gy in range(0, rows, 16):

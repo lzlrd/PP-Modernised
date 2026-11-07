@@ -210,7 +210,7 @@ def main():
 		os.makedirs(os.path.join(out, "geyser_custom_mappings"), exist_ok=True)
 		with open(os.path.join(out, "geyser_custom_mappings", "pp_modernised_dnt.json"), "w") as f:
 			json.dump({"format_version": 2, "items": items}, f, indent="\t")
-	report.append("mapped %d Dungeons and Taverns keys to Geyser custom items" % sum(len(v) for v in items.values()))
+	report.append("mapped %d Dungeons and Taverns keys to Geyser custom items" % sum(1 for defs in items.values() for v in defs if "dnt_" in v["bedrock_identifier"]))
 
 	# 5. Manifest.
 	ver = [int(x) for x in version.split(".")]
@@ -230,6 +230,9 @@ def main():
 	}
 	with open(os.path.join(pack, "manifest.json"), "w") as f:
 		json.dump(manifest, f, indent="\t")
+	for name in ("LICENSE.md", "CREDITS.md"):
+		if os.path.exists(os.path.join(java, name)):
+			shutil.copy2(os.path.join(java, name), os.path.join(pack, name))
 	with open(os.path.join(out, "bedrock_report.txt"), "w") as f:
 		f.write("\n".join(report) + "\n")
 	print("\n".join(report))
