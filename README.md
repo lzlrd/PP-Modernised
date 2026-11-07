@@ -18,7 +18,7 @@ Built on [Pixel Perfection Legacy](https://modrinth.com/resourcepack/pixel-perfe
 
 **Server (Paper/Leaf):** host the zip and set `resource-pack`, `resource-pack-sha1` and `resource-pack-id` in `server.properties`.
 
-**Geyser:** put `PP-Modernised.mcpack` in `plugins/Geyser-Spigot/packs/`. If the server runs Dungeons and Taverns, also put `pp_modernised_dnt.json` in `plugins/Geyser-Spigot/custom_mappings/` and keep `enable-custom-content: true`. Restart the server. Bedrock players see the PBR when Vibrant Visuals is on.
+**Geyser:** put `pp_modernised.mcpack` in `plugins/Geyser-Spigot/packs/` and `pp_modernised.json` in `plugins/Geyser-Spigot/custom_mappings/`, keep `enable-custom-content: true`, and restart the server. The mappings cover Dungeons and Taverns keys and do nothing on servers without it. Bedrock players see the PBR when Vibrant Visuals is on.
 
 Bedrock can't change vanilla block shapes, so the 3D models are Java-only. Random block variants and the quiver CIT are also Java-only.
 
@@ -33,6 +33,7 @@ Bedrock can't change vanilla block shapes, so the 3D models are Java-only. Rando
 tools/build_java.sh . build                  # build/PP-Modernised.zip
 java -jar Thunder.jar nogui --input build/PP-Modernised.zip
 python3 tools/gen_bedrock.py <thunder output dir> build/PP-Modernised <Thunder textures.json> <bedrock-samples textures dir> <Dungeons and Taverns datapack dir> 1.0.0 build/bedrock
+(cd build/bedrock/PP-Modernised && zip -r ../pp_modernised.mcpack .)  # mappings: build/bedrock/geyser_custom_mappings/pp_modernised.json
 ```
 
 The other scripts in `tools/` are the one-off generators and checks used to make this version. Each one documents its usage at the top of the file.

@@ -10,7 +10,7 @@
 
 Usage: python3 -I gen_bedrock.py THUNDER_DIR JAVA_PACK_DIR THUNDER_TEXTURE_MAP BEDROCK_REF_DIR DNT_DATAPACK_DIR VERSION OUT_DIR
 THUNDER_DIR is the unzipped Thunder .mcpack; OUT_DIR receives the finished pack folder,
-geyser_custom_mappings/pp_modernised_dnt.json and a report.
+geyser_custom_mappings/pp_modernised.json and a report.
 """
 import json
 import os
@@ -208,7 +208,7 @@ def main():
 		with open(path, "w") as f:
 			json.dump(data, f, indent="\t")
 		os.makedirs(os.path.join(out, "geyser_custom_mappings"), exist_ok=True)
-		with open(os.path.join(out, "geyser_custom_mappings", "pp_modernised_dnt.json"), "w") as f:
+		with open(os.path.join(out, "geyser_custom_mappings", "pp_modernised.json"), "w") as f:
 			json.dump({"format_version": 2, "items": items}, f, indent="\t")
 	report.append("mapped %d Dungeons and Taverns keys to Geyser custom items" % sum(1 for defs in items.values() for v in defs if "dnt_" in v["bedrock_identifier"]))
 
