@@ -1,49 +1,16 @@
 {
-    "random.door_close": {
-        "category": "block",
-        "replace": true,
-        "sounds": [
-            "random/door_close"
-        ]
-    },
-    "random.door_open": {
-        "category": "block",
-        "replace": true,
-        "sounds": [
-            "random/door_open"
-        ]
-    },
-    "creeper.primed": {
-        "category": "hostile",
-        "replace": true,
-        "sounds": [
-            "random/creeperfuse"
-        ]
-    },
-		"entity.endermite.ambient": {
+	"random.door_close": {
+		"category": "block",
 		"replace": true,
 		"sounds": [
-			"mob/endermite/idle1",
-			"mob/endermite/idle2",
-			"mob/endermite/idle3"
-		],
-		"subtitle": "subtitles.entity.endermite.ambient"
+			"random/door_close"
+		]
 	},
-	"entity.endermite.death": {
+	"random.door_open": {
+		"category": "block",
 		"replace": true,
 		"sounds": [
-			"mob/endermite/death1",
-			"mob/endermite/death2"
-		],
-		"subtitle": "subtitles.entity.endermite.death"
-	},
-	"entity.endermite.hurt": {
-		"replace": true,
-		"sounds": [
-			"mob/endermite/hurt1",
-			"mob/endermite/hurt2",
-			"mob/endermite/hurt3"
-		],
-		"subtitle": "subtitles.entity.endermite.hurt"
+			"random/door_open"
+		]
 	}
 }
