@@ -14,7 +14,7 @@ Built on [Pixel Perfection Legacy](https://modrinth.com/resourcepack/pixel-perfe
 
 ## Install
 
-**Java 26.3:** put `PP-Modernised.zip` in `resourcepacks/`. For shaders, install Iris and pick a LabPBR shader pack. In Complementary, set RP Support to labPBR.
+**Java 26.3:** put `pp_modernised.zip` in `resourcepacks/`. For shaders, install Iris and pick a LabPBR shader pack. In Complementary, set RP Support to labPBR.
 
 **Server (Paper/Leaf):** host the zip and set `resource-pack`, `resource-pack-sha1` and `resource-pack-id` in `server.properties`.
 
@@ -30,8 +30,8 @@ Bedrock can't change vanilla block shapes, so the 3D models are Java-only. Rando
 ## Build
 
 ```sh
-tools/build_java.sh . build                  # build/PP-Modernised.zip
-java -jar Thunder.jar nogui --input build/PP-Modernised.zip
+tools/build_java.sh . build                  # build/pp_modernised.zip
+java -jar Thunder.jar nogui --input build/pp_modernised.zip
 python3 tools/gen_bedrock.py <thunder output dir> build/PP-Modernised <Thunder textures.json> <bedrock-samples textures dir> <Dungeons and Taverns datapack dir> 1.0.0 build/bedrock
 (cd build/bedrock/PP-Modernised && zip -r ../pp_modernised.mcpack .)  # mappings: build/bedrock/geyser_custom_mappings/pp_modernised.json
 ```
