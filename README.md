@@ -22,6 +22,12 @@ Built on [Pixel Perfection Legacy](https://modrinth.com/resourcepack/pixel-perfe
 
 Bedrock can't change vanilla block shapes, so the 3D models are Java-only. Random block variants and the quiver CIT are also Java-only.
 
+### With Sparkles or Dungeons and Taverns
+
+Sparkles ships its own wither skeleton skins in the same slots as PPL's biome variants, and Dungeons and Taverns ships its own chart, map and key art. Whichever pack loads higher wins outright, so one set disappears. `pp_modernised_compat.zip` fixes both: it keeps Sparkles' named Incendium wither skeletons (Headless Warrior, Withered Scientist), moves PPL's biome variants to free slots, and restores PPL's D&T art. Load it above Sparkles and Dungeons and Taverns.
+
+Servers always stack their resource packs above your local ones. If a server sends Sparkles or Dungeons and Taverns, either serve the patch from the server, last in the list, or install [Server Pack Unlocker](https://modrinth.com/mod/server-pack-unlocker) (Fabric) and drag `pp_modernised.zip` and the patch above the server packs.
+
 ## Optional mods (Java)
 
 - [Continuity](https://modrinth.com/mod/continuity): connected glass and bookshelves (OptiFine CTM format).
@@ -30,7 +36,7 @@ Bedrock can't change vanilla block shapes, so the 3D models are Java-only. Rando
 ## Build
 
 ```sh
-tools/build_java.sh . build                  # build/pp_modernised.zip
+tools/build_java.sh . build                  # build/pp_modernised.zip and build/pp_modernised_compat.zip
 java -jar Thunder.jar nogui --input build/pp_modernised.zip
 python3 tools/gen_bedrock.py <thunder output dir> build/PP-Modernised <Thunder textures.json> <bedrock-samples textures dir> <Dungeons and Taverns datapack dir> 1.0.0 build/bedrock
 (cd build/bedrock/PP-Modernised && zip -r ../pp_modernised.mcpack .)  # mappings: build/bedrock/geyser_custom_mappings/pp_modernised.json
